@@ -1,0 +1,7 @@
+{
+  "type": "REALLOCATE",
+  "amount": 150,
+  "description": "Corregido",
+  "fromEnvelopeId": "envelope-central",
+  "toEnvelopeId": "envelope-central"
+}

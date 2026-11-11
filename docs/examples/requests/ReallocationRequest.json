@@ -1,0 +1,7 @@
+{
+  "periodId": "period-q1",
+  "fromEnvelopeId": "envelope-sams",
+  "toEnvelopeId": "envelope-central",
+  "amount": 70,
+  "description": "Apoyo de presupuesto"
+}

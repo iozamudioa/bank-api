@@ -1,0 +1,7 @@
+{
+  "name": "Central de Abastos",
+  "accountId": "account-cash",
+  "type": "SPENDING",
+  "category": "Alimentación",
+  "habitualAmount": 4500
+}

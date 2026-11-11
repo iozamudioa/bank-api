@@ -1,0 +1,16 @@
+{
+  "periodId": "period-q1",
+  "targetEnvelopeId": "envelope-central",
+  "amount": 150,
+  "description": "Carne",
+  "fundingSources": [
+    {
+      "envelopeId": "envelope-central",
+      "amount": 80
+    },
+    {
+      "envelopeId": "envelope-sams",
+      "amount": 70
+    }
+  ]
+}

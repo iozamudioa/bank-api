@@ -1,0 +1,112 @@
+### BANK API - VS Code REST Client (sustituye IDs después de cada creación)
+@base = http://localhost:8080/api/v1
+@household = REEMPLAZA_CON_ID_DE_HOGAR
+@digital = REEMPLAZA_ID_DE_CUENTA_DIGITAL
+@physical = REEMPLAZA_ID_DE_CUENTA_FISICA
+@central = REEMPLAZA_ID_DE_CENTRAL
+@sams = REEMPLAZA_ID_DE_SAMS
+@period = REEMPLAZA_ID_DE_QUINCENA
+
+### 1. Crear hogar (Basic Auth del propietario (usuario: olda))
+POST {{base}}/households
+Authorization: Basic olda CAMBIA_ESTA_CLAVE
+Content-Type: application/json
+
+{"name":"Familia LGZV","displayName":"Olda"}
+
+### 2. Mi perfil
+GET {{base}}/me
+Authorization: Basic olda CAMBIA_ESTA_CLAVE
+
+### 3. Agregar a Cecy como editora
+POST {{base}}/households/{{household}}/members
+Authorization: Basic olda CAMBIA_ESTA_CLAVE
+Content-Type: application/json
+
+{"username":"cecy","displayName":"Cecy","role":"EDITOR"}
+
+### 4. Cuenta digital (repite PHYSICAL para efectivo)
+POST {{base}}/households/{{household}}/accounts
+Authorization: Basic olda CAMBIA_ESTA_CLAVE
+Content-Type: application/json
+
+{"name":"Principal digital","type":"DIGITAL"}
+
+### 5. Sobre Central / sobre Sam's (ambos físicos)
+POST {{base}}/households/{{household}}/envelopes
+Authorization: Basic olda CAMBIA_ESTA_CLAVE
+Content-Type: application/json
+
+{"name":"Central de Abastos","accountId":"{{physical}}","type":"SPENDING","category":"Alimentación"}
+
+### 6. Plantilla quincenal (fragmento didáctico)
+PUT {{base}}/households/{{household}}/budget-template
+Authorization: Basic olda CAMBIA_ESTA_CLAVE
+Content-Type: application/json
+
+{"expectedIncome":21000.00,"allocations":[{"envelopeId":"{{central}}","amount":4500.00},{"envelopeId":"{{sams}}","amount":1000.00}]}
+
+### 7. Crear Q01
+POST {{base}}/households/{{household}}/budget-periods
+Authorization: Basic olda CAMBIA_ESTA_CLAVE
+Content-Type: application/json
+
+{"startDate":"2026-11-15","endDate":"2026-11-30","open":true}
+
+### 8. Depositar nómina
+POST {{base}}/households/{{household}}/movements/incomes
+Idempotency-Key: bank-example-1
+Authorization: Basic olda CAMBIA_ESTA_CLAVE
+Content-Type: application/json
+
+{"periodId":"{{period}}","accountId":"{{digital}}","amount":21000.00,"description":"Nómina"}
+
+### 9. Retirar dinero digital > físico (solo dinero libre)
+POST {{base}}/households/{{household}}/movements/transfers
+Idempotency-Key: bank-example-2
+Authorization: Basic olda CAMBIA_ESTA_CLAVE
+Content-Type: application/json
+
+{"periodId":"{{period}}","fromAccountId":"{{digital}}","toAccountId":"{{physical}}","amount":5500.00,"description":"Retiro para sobres"}
+
+### 10. Apartar efectivo en Central
+POST {{base}}/households/{{household}}/movements/allocations
+Idempotency-Key: bank-example-3
+Authorization: Basic olda CAMBIA_ESTA_CLAVE
+Content-Type: application/json
+
+{"periodId":"{{period}}","envelopeId":"{{central}}","amount":80.00,"description":"Fondeo parcial de ejemplo"}
+
+### 11. Preview gasto con insuficiencia
+POST {{base}}/households/{{household}}/movements/expenses/preview
+Authorization: Basic olda CAMBIA_ESTA_CLAVE
+Content-Type: application/json
+
+{"periodId":"{{period}}","targetEnvelopeId":"{{central}}","amount":150.00,"description":"Carne"}
+
+### 12. Gasto con financiamiento desde dos sobres (Sam's debe tener antes >= 70)
+POST {{base}}/households/{{household}}/movements/expenses
+Idempotency-Key: bank-example-4
+Authorization: Basic olda CAMBIA_ESTA_CLAVE
+Content-Type: application/json
+
+{"periodId":"{{period}}","targetEnvelopeId":"{{central}}","amount":150.00,"description":"Carne","fundingSources":[{"envelopeId":"{{central}}","amount":80.00},{"envelopeId":"{{sams}}","amount":70.00}]}
+
+### 13. Dashboard
+GET {{base}}/households/{{household}}/dashboard
+Authorization: Basic olda CAMBIA_ESTA_CLAVE
+
+### Consultar página con filtros opcionales
+GET {{base}}/households/{{household}}/movements?page=0&size=20&periodId={{period}}&accountId={{physical}}&envelopeId={{central}}
+Authorization: Basic olda CAMBIA_ESTA_CLAVE
+
+### Fondear Sam's antes del gasto inteligente si todavía no tiene fondos
+POST {{base}}/households/{{household}}/movements/allocations
+Idempotency-Key: bank-example-fondeo-sams
+Authorization: Basic olda CAMBIA_ESTA_CLAVE
+Content-Type: application/json
+
+{"periodId":"{{period}}","envelopeId":"{{sams}}","amount":1000.00,"description":"Fondeo Sam's"}
+
+# Cada clave representa una única operación; cambia la clave para registrar otra operación.
+# Repetir clave y datos devuelve la respuesta original. La misma clave con datos diferentes responde 409.

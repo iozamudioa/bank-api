@@ -1,0 +1,6 @@
+{
+  "type": "EXPENSE",
+  "amount": 150,
+  "description": "Corregido",
+  "targetEnvelopeId": "envelope-central"
+}

@@ -1,0 +1,33 @@
+spring:
+  application:
+    name: bank-api
+  mongodb:
+    uri: ${MONGODB_URI:mongodb://localhost:27017/bank_db?replicaSet=rs0&directConnection=true}
+  data:
+    mongodb:
+      auto-index-creation: true
+      representation:
+        big-decimal: DECIMAL128
+bank:
+  auth:
+    owner-user: ${BANK_OWNER_USERNAME:olda}
+    owner-password: ${BANK_OWNER_PASSWORD:}
+    cecy-user: ${BANK_CECY_USERNAME:cecy}
+    cecy-password: ${BANK_CECY_PASSWORD:}
+server:
+  port: ${PORT:8080}
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+springdoc:
+  paths-to-match: /api/v1/**
+  override-with-generic-response: false
+  writer-with-order-by-keys: true
+  api-docs:
+    version: OPENAPI_3_0
+  swagger-ui:
+    path: /swagger-ui.html
+    disable-swagger-default-url: true
+    persist-authorization: false

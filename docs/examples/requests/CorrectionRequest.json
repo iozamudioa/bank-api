@@ -1,0 +1,10 @@
+{
+  "periodId": "period-q1",
+  "reason": "Correccion de captura",
+  "replacement": {
+    "type": "INCOME",
+    "accountId": "account-cash",
+    "amount": 1200,
+    "description": "Ingreso corregido"
+  }
+}

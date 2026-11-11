@@ -1,0 +1,12 @@
+{
+  "requestedAmount": 150,
+  "targetBalance": 80,
+  "shortfall": 70,
+  "eligibleDonors": [
+    {
+      "envelopeId": "envelope-sams",
+      "name": "Sam's",
+      "balance": 1000
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+{
+  "type": "ACCOUNT_EXPENSE",
+  "amount": 150,
+  "description": "Corregido",
+  "accountId": "account-cash"
+}

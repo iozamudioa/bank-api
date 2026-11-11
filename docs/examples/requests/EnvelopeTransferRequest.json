@@ -1,0 +1,7 @@
+{
+  "periodId": "period-q1",
+  "fromEnvelopeId": "envelope-sams",
+  "toEnvelopeId": "envelope-digital",
+  "amount": 50,
+  "description": "Traslado real a otra cuenta"
+}

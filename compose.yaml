@@ -1,0 +1,40 @@
+services:
+  api:
+    profiles: ["app"]
+    build: .
+    ports:
+      - "127.0.0.1:8080:8080"
+    environment:
+      MONGODB_URI: mongodb://mongo:27017/bank_db?replicaSet=rs0
+      BANK_OWNER_USERNAME: ${BANK_OWNER_USERNAME:-olda}
+      BANK_OWNER_PASSWORD: ${BANK_OWNER_PASSWORD:-}
+      BANK_CECY_USERNAME: ${BANK_CECY_USERNAME:-cecy}
+      BANK_CECY_PASSWORD: ${BANK_CECY_PASSWORD:-}
+    depends_on:
+      mongo-init:
+        condition: service_completed_successfully
+  mongo:
+    image: mongo:8.0
+    container_name: bank-mongo
+    command: ["mongod", "--replSet", "rs0", "--bind_ip_all"]
+    hostname: mongo
+    ports:
+      - "127.0.0.1:27017:27017"
+    volumes:
+      - bank_mongo_data:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "--eval", "db.adminCommand('ping').ok"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+  mongo-init:
+    image: mongo:8.0
+    depends_on:
+      mongo:
+        condition: service_healthy
+    restart: "no"
+    volumes:
+      - ./scripts/mongo-init.sh:/mongo-init.sh:ro
+    entrypoint: ["bash", "/mongo-init.sh"]
+volumes:
+  bank_mongo_data:

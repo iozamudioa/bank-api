@@ -1,0 +1,7 @@
+{
+  "type": "TRANSFER",
+  "amount": 150,
+  "description": "Corregido",
+  "fromAccountId": "account-cash",
+  "toAccountId": "account-cash"
+}

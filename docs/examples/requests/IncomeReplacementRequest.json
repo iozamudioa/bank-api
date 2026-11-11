@@ -1,0 +1,7 @@
+{
+  "type": "INCOME",
+  "amount": 150,
+  "description": "Corregido",
+  "accountId": "account-cash",
+  "incomeSourceId": "income-payroll"
+}

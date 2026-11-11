@@ -1,0 +1,7 @@
+{
+  "periodId": "period-q1",
+  "fromAccountId": "account-digital",
+  "toAccountId": "account-cash",
+  "amount": 1080,
+  "description": "Retiro para sobres"
+}

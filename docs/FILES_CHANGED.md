@@ -1,0 +1,226 @@
+# Archivos de la revisión
+
+Inventario de archivos añadidos o intervenidos. El directorio recibido no tiene metadata Git.
+
+## Código principal y pruebas
+
+- `src/main/java/dev/ioza/bank/infrastructure/adapters/in/controllers/AccountController.java`
+- `src/main/java/dev/ioza/bank/infrastructure/adapters/in/controllers/BudgetController.java`
+- `src/main/java/dev/ioza/bank/infrastructure/adapters/in/controllers/DashboardController.java`
+- `src/main/java/dev/ioza/bank/infrastructure/adapters/in/controllers/EnvelopeController.java`
+- `src/main/java/dev/ioza/bank/infrastructure/adapters/in/controllers/HouseholdController.java`
+- `src/main/java/dev/ioza/bank/infrastructure/adapters/in/controllers/MovementController.java`
+- `src/main/java/dev/ioza/bank/infrastructure/adapters/in/controllers/request/AddMemberRequest.java`
+- `src/main/java/dev/ioza/bank/infrastructure/adapters/in/controllers/request/AllocationRequest.java`
+- `src/main/java/dev/ioza/bank/infrastructure/adapters/in/controllers/request/BudgetLineRequest.java`
+- `src/main/java/dev/ioza/bank/infrastructure/adapters/in/controllers/request/CreateAccountRequest.java`
+- `src/main/java/dev/ioza/bank/infrastructure/adapters/in/controllers/request/CreateEnvelopeRequest.java`
+- `src/main/java/dev/ioza/bank/infrastructure/adapters/in/controllers/request/CreateHouseholdRequest.java`
+- `src/main/java/dev/ioza/bank/infrastructure/adapters/in/controllers/request/CreateIncomeSourceRequest.java`
+- `src/main/java/dev/ioza/bank/infrastructure/adapters/in/controllers/request/CreatePeriodRequest.java`
+- `src/main/java/dev/ioza/bank/infrastructure/adapters/in/controllers/request/EnvelopeTransferRequest.java`
+- `src/main/java/dev/ioza/bank/infrastructure/adapters/in/controllers/request/ExpenseRequest.java`
+- `src/main/java/dev/ioza/bank/infrastructure/adapters/in/controllers/request/FundingRequest.java`
+- `src/main/java/dev/ioza/bank/infrastructure/adapters/in/controllers/request/IncomeRequest.java`
+- `src/main/java/dev/ioza/bank/infrastructure/adapters/in/controllers/request/OpeningBalanceRequest.java`
+- `src/main/java/dev/ioza/bank/infrastructure/adapters/in/controllers/request/ReallocationRequest.java`
+- `src/main/java/dev/ioza/bank/infrastructure/adapters/in/controllers/request/ReverseRequest.java`
+- `src/main/java/dev/ioza/bank/infrastructure/adapters/in/controllers/request/SaveBudgetRequest.java`
+- `src/main/java/dev/ioza/bank/infrastructure/adapters/in/controllers/request/TransferRequest.java`
+- `src/main/java/dev/ioza/bank/infrastructure/adapters/in/controllers/response/AccountBalanceResponse.java`
+- `src/main/java/dev/ioza/bank/infrastructure/adapters/in/controllers/response/AccountResponse.java`
+- `src/main/java/dev/ioza/bank/infrastructure/adapters/in/controllers/response/BalanceEffectResponse.java`
+- `src/main/java/dev/ioza/bank/infrastructure/adapters/in/controllers/response/BudgetLineResponse.java`
+- `src/main/java/dev/ioza/bank/infrastructure/adapters/in/controllers/response/BudgetPeriodResponse.java`
+- `src/main/java/dev/ioza/bank/infrastructure/adapters/in/controllers/response/BudgetTemplateResponse.java`
+- `src/main/java/dev/ioza/bank/infrastructure/adapters/in/controllers/response/DashboardViewResponse.java`
+- `src/main/java/dev/ioza/bank/infrastructure/adapters/in/controllers/response/DonorOptionResponse.java`
+- `src/main/java/dev/ioza/bank/infrastructure/adapters/in/controllers/response/EnvelopeResponse.java`
+- `src/main/java/dev/ioza/bank/infrastructure/adapters/in/controllers/response/ErrorResponse.java`
+- `src/main/java/dev/ioza/bank/infrastructure/adapters/in/controllers/response/ExpensePreviewResponse.java`
+- `src/main/java/dev/ioza/bank/infrastructure/adapters/in/controllers/response/FundingResponse.java`
+- `src/main/java/dev/ioza/bank/infrastructure/adapters/in/controllers/response/HouseholdMemberResponse.java`
+- `src/main/java/dev/ioza/bank/infrastructure/adapters/in/controllers/response/HouseholdResponse.java`
+- `src/main/java/dev/ioza/bank/infrastructure/adapters/in/controllers/response/IncomeSourceResponse.java`
+- `src/main/java/dev/ioza/bank/infrastructure/adapters/in/controllers/response/MovementResponse.java`
+- `src/main/java/dev/ioza/bank/infrastructure/adapters/in/controllers/response/UserResponse.java`
+- `src/main/java/dev/ioza/bank/infrastructure/adapters/out/mongo/AccountMongoAdapter.java`
+- `src/main/java/dev/ioza/bank/infrastructure/adapters/out/mongo/BudgetMongoAdapter.java`
+- `src/main/java/dev/ioza/bank/infrastructure/adapters/out/mongo/documents/AccountDoc.java`
+- `src/main/java/dev/ioza/bank/infrastructure/adapters/out/mongo/documents/BalanceEffectDoc.java`
+- `src/main/java/dev/ioza/bank/infrastructure/adapters/out/mongo/documents/BudgetLineDoc.java`
+- `src/main/java/dev/ioza/bank/infrastructure/adapters/out/mongo/documents/BudgetPeriodDoc.java`
+- `src/main/java/dev/ioza/bank/infrastructure/adapters/out/mongo/documents/BudgetTemplateDoc.java`
+- `src/main/java/dev/ioza/bank/infrastructure/adapters/out/mongo/documents/EnvelopeDoc.java`
+- `src/main/java/dev/ioza/bank/infrastructure/adapters/out/mongo/documents/FundingDoc.java`
+- `src/main/java/dev/ioza/bank/infrastructure/adapters/out/mongo/documents/HouseholdDoc.java`
+- `src/main/java/dev/ioza/bank/infrastructure/adapters/out/mongo/documents/HouseholdMemberDoc.java`
+- `src/main/java/dev/ioza/bank/infrastructure/adapters/out/mongo/documents/IdempotencyDoc.java`
+- `src/main/java/dev/ioza/bank/infrastructure/adapters/out/mongo/documents/IncomeSourceDoc.java`
+- `src/main/java/dev/ioza/bank/infrastructure/adapters/out/mongo/documents/MovementDoc.java`
+- `src/main/java/dev/ioza/bank/infrastructure/adapters/out/mongo/EnvelopeMongoAdapter.java`
+- `src/main/java/dev/ioza/bank/infrastructure/adapters/out/mongo/HouseholdMongoAdapter.java`
+- `src/main/java/dev/ioza/bank/infrastructure/adapters/out/mongo/IdempotencyMongoAdapter.java`
+- `src/main/java/dev/ioza/bank/infrastructure/adapters/out/mongo/IncomeMongoAdapter.java`
+- `src/main/java/dev/ioza/bank/infrastructure/adapters/out/mongo/JsonCommandFingerprint.java`
+- `src/main/java/dev/ioza/bank/infrastructure/adapters/out/mongo/mappers/MongoMapper.java`
+- `src/main/java/dev/ioza/bank/infrastructure/adapters/out/mongo/MemberMongoAdapter.java`
+- `src/main/java/dev/ioza/bank/infrastructure/adapters/out/mongo/MovementMongoAdapter.java`
+- `src/main/java/dev/ioza/bank/infrastructure/adapters/out/mongo/repositories/AccountMongoRepository.java`
+- `src/main/java/dev/ioza/bank/infrastructure/adapters/out/mongo/repositories/BudgetPeriodMongoRepository.java`
+- `src/main/java/dev/ioza/bank/infrastructure/adapters/out/mongo/repositories/BudgetTemplateMongoRepository.java`
+- `src/main/java/dev/ioza/bank/infrastructure/adapters/out/mongo/repositories/EnvelopeMongoRepository.java`
+- `src/main/java/dev/ioza/bank/infrastructure/adapters/out/mongo/repositories/HouseholdMongoRepository.java`
+- `src/main/java/dev/ioza/bank/infrastructure/adapters/out/mongo/repositories/IncomeSourceMongoRepository.java`
+- `src/main/java/dev/ioza/bank/infrastructure/adapters/out/mongo/repositories/MemberMongoRepository.java`
+- `src/main/java/dev/ioza/bank/infrastructure/adapters/out/mongo/repositories/MovementMongoRepository.java`
+- `src/main/java/dev/ioza/bank/application/commands/AddMember.java`
+- `src/main/java/dev/ioza/bank/application/commands/Allocation.java`
+- `src/main/java/dev/ioza/bank/application/commands/CreateAccount.java`
+- `src/main/java/dev/ioza/bank/application/commands/CreateEnvelope.java`
+- `src/main/java/dev/ioza/bank/application/commands/CreateHousehold.java`
+- `src/main/java/dev/ioza/bank/application/commands/CreateIncomeSource.java`
+- `src/main/java/dev/ioza/bank/application/commands/CreatePeriod.java`
+- `src/main/java/dev/ioza/bank/application/commands/EnvelopeTransfer.java`
+- `src/main/java/dev/ioza/bank/application/commands/Expense.java`
+- `src/main/java/dev/ioza/bank/application/commands/Income.java`
+- `src/main/java/dev/ioza/bank/application/commands/OpeningBalance.java`
+- `src/main/java/dev/ioza/bank/application/commands/Reallocation.java`
+- `src/main/java/dev/ioza/bank/application/commands/Reverse.java`
+- `src/main/java/dev/ioza/bank/application/commands/SaveBudget.java`
+- `src/main/java/dev/ioza/bank/application/commands/Transfer.java`
+- `src/main/java/dev/ioza/bank/application/ports/in/AccountBalance.java`
+- `src/main/java/dev/ioza/bank/application/ports/in/Budget.java`
+- `src/main/java/dev/ioza/bank/application/ports/in/Dashboard.java`
+- `src/main/java/dev/ioza/bank/application/ports/in/DashboardView.java`
+- `src/main/java/dev/ioza/bank/application/ports/in/DonorOption.java`
+- `src/main/java/dev/ioza/bank/application/ports/in/ExpensePreview.java`
+- `src/main/java/dev/ioza/bank/application/ports/in/Finance.java`
+- `src/main/java/dev/ioza/bank/application/ports/in/IdempotentMovements.java`
+- `src/main/java/dev/ioza/bank/application/ports/in/Setup.java`
+- `src/main/java/dev/ioza/bank/application/ports/out/Accounts.java`
+- `src/main/java/dev/ioza/bank/application/ports/out/Budgets.java`
+- `src/main/java/dev/ioza/bank/application/ports/out/CommandFingerprint.java`
+- `src/main/java/dev/ioza/bank/application/ports/out/CurrentUser.java`
+- `src/main/java/dev/ioza/bank/application/ports/out/Envelopes.java`
+- `src/main/java/dev/ioza/bank/application/ports/out/Households.java`
+- `src/main/java/dev/ioza/bank/application/ports/out/IdempotencyStore.java`
+- `src/main/java/dev/ioza/bank/application/ports/out/Incomes.java`
+- `src/main/java/dev/ioza/bank/application/ports/out/Members.java`
+- `src/main/java/dev/ioza/bank/application/ports/out/Movements.java`
+- `src/main/java/dev/ioza/bank/application/queries/MovementQuery.java`
+- `src/main/java/dev/ioza/bank/application/services/AccessService.java`
+- `src/main/java/dev/ioza/bank/application/services/BudgetService.java`
+- `src/main/java/dev/ioza/bank/application/services/DashboardService.java`
+- `src/main/java/dev/ioza/bank/application/services/IdempotentMovementService.java`
+- `src/main/java/dev/ioza/bank/application/services/MovementService.java`
+- `src/main/java/dev/ioza/bank/application/services/SetupService.java`
+- `src/main/java/dev/ioza/bank/application/usecase/AllocateMoney.java`
+- `src/main/java/dev/ioza/bank/application/usecase/PreviewExpense.java`
+- `src/main/java/dev/ioza/bank/application/usecase/ReallocateEnvelopes.java`
+- `src/main/java/dev/ioza/bank/application/usecase/RegisterExpense.java`
+- `src/main/java/dev/ioza/bank/application/usecase/RegisterIncome.java`
+- `src/main/java/dev/ioza/bank/application/usecase/RegisterOpeningBalance.java`
+- `src/main/java/dev/ioza/bank/application/usecase/ReleaseReserve.java`
+- `src/main/java/dev/ioza/bank/application/usecase/ReverseMovement.java`
+- `src/main/java/dev/ioza/bank/application/usecase/TransferAccounts.java`
+- `src/main/java/dev/ioza/bank/application/usecase/TransferEnvelopes.java`
+- `src/main/java/dev/ioza/bank/BankApplication.java`
+- `src/main/java/dev/ioza/bank/infrastructure/config/InfrastructureConfig.java`
+- `src/main/java/dev/ioza/bank/infrastructure/security/SecurityConfig.java`
+- `src/main/java/dev/ioza/bank/domain/enums/AccountType.java`
+- `src/main/java/dev/ioza/bank/domain/enums/EnvelopeType.java`
+- `src/main/java/dev/ioza/bank/domain/enums/IncomeSourceType.java`
+- `src/main/java/dev/ioza/bank/domain/enums/MemberRole.java`
+- `src/main/java/dev/ioza/bank/domain/enums/MovementStatus.java`
+- `src/main/java/dev/ioza/bank/domain/enums/MovementType.java`
+- `src/main/java/dev/ioza/bank/domain/enums/PeriodStatus.java`
+- `src/main/java/dev/ioza/bank/domain/exceptions/ConflictException.java`
+- `src/main/java/dev/ioza/bank/domain/exceptions/ForbiddenException.java`
+- `src/main/java/dev/ioza/bank/domain/exceptions/NotFoundException.java`
+- `src/main/java/dev/ioza/bank/domain/exceptions/ValidationException.java`
+- `src/main/java/dev/ioza/bank/domain/model/Account.java`
+- `src/main/java/dev/ioza/bank/domain/model/BalanceEffect.java`
+- `src/main/java/dev/ioza/bank/domain/model/BudgetLine.java`
+- `src/main/java/dev/ioza/bank/domain/model/BudgetPeriod.java`
+- `src/main/java/dev/ioza/bank/domain/model/BudgetTemplate.java`
+- `src/main/java/dev/ioza/bank/domain/model/Envelope.java`
+- `src/main/java/dev/ioza/bank/domain/model/Funding.java`
+- `src/main/java/dev/ioza/bank/domain/model/Household.java`
+- `src/main/java/dev/ioza/bank/domain/model/HouseholdMember.java`
+- `src/main/java/dev/ioza/bank/domain/model/IdempotencyRecord.java`
+- `src/main/java/dev/ioza/bank/domain/model/IncomeSource.java`
+- `src/main/java/dev/ioza/bank/domain/model/Movement.java`
+- `src/main/java/dev/ioza/bank/domain/Money.java`
+- `src/main/java/dev/ioza/bank/infrastructure/adapters/in/controllers/advice/ApiExceptionHandler.java`
+- `src/test/java/dev/ioza/bank/application/services/HttpContractTest.java`
+- `src/test/java/dev/ioza/bank/application/services/IdempotentMovementServiceTest.java`
+- `src/test/java/dev/ioza/bank/application/services/MoneyTest.java`
+- `src/test/java/dev/ioza/bank/application/services/MovementServiceTest.java`
+- `src/test/java/dev/ioza/bank/application/services/SetupBudgetServiceTest.java`
+- `src/test/java/dev/ioza/bank/architecture/ArchitectureTest.java`
+- `src/test/java/dev/ioza/bank/integration/MongoFinanceIntegrationTest.java`
+
+## Configuración, operación y documentación
+
+- `pom.xml`
+- `README.md`
+- `compose.yaml`
+- `Dockerfile` (nuevo)
+- `.dockerignore` (nuevo)
+- `scripts/mongo-init.sh`
+- `scripts/verify-mongo.ps1` (nuevo)
+- `docs/CODEX_PROMPT.md`
+- `docs/CODEX_NEXT.md`
+- `docs/API.http`
+- `docs/ARCHITECTURE.md` (nuevo)
+- `docs/ENDPOINTS.md` (nuevo)
+- `docs/REFACTOR_REPORT.md` (nuevo)
+- `docs/FILES_CHANGED.md` (nuevo)
+
+## Contenedores y adapter duplicado retirados
+
+- `src/main/java/dev/ioza/bank/domain/model/Models.java`
+- `src/main/java/dev/ioza/bank/domain/model/Types.java`
+- `src/main/java/dev/ioza/bank/application/usecase/Commands.java`
+- `src/main/java/dev/ioza/bank/application/ports/in/UseCasePorts.java`
+- `src/main/java/dev/ioza/bank/application/ports/out/StoragePorts.java`
+- `src/main/java/dev/ioza/bank/adapters/out/mongo/documents/MongoDocuments.java`
+- `src/main/java/dev/ioza/bank/adapters/out/mongo/MongoPersistenceAdapter.java`
+
+Las cuatro excepciones de negocio se trasladaron desde exceptions a domain/exceptions. .env.example y bootstrap.py conservan su configuración/contenido original. application.yml incorpora ahora Springdoc.
+
+
+## Documentación OpenAPI y contrato PWA (2026-11-10)
+
+- `src/main/java/dev/ioza/bank/infrastructure/config/OpenApiConfig.java` (nuevo)
+- `src/main/resources/application.yml` (configuración Springdoc)
+- `src/test/java/dev/ioza/bank/documentation/OpenApiContractTest.java` (nuevo)
+- `scripts/export-openapi.ps1` (nuevo)
+- `docs/FRONTEND_HANDOFF.md` (nuevo)
+- `docs/FRONTEND_INTEGRATION.md` (nuevo)
+- `docs/OPENAPI.md` (nuevo)
+- `docs/DOCUMENTATION_REPORT.md` (nuevo)
+- `docs/openapi/bank-api-v1.yaml` (generado)
+- `docs/examples/expense-preview-request.json` (nuevo)
+- `docs/examples/expense-preview-response.json` (nuevo)
+- `docs/examples/onboarding.http` (nuevo)
+- `docs/examples/README.md` (nuevo)
+- `docs/examples/requests/AddMemberRequest.json` (nuevo)
+- `docs/examples/requests/AllocationRequest.json` (nuevo)
+- `docs/examples/requests/BudgetLineRequest.json` (nuevo)
+- `docs/examples/requests/CreateAccountRequest.json` (nuevo)
+- `docs/examples/requests/CreateEnvelopeRequest.json` (nuevo)
+- `docs/examples/requests/CreateHouseholdRequest.json` (nuevo)
+- `docs/examples/requests/CreateIncomeSourceRequest.json` (nuevo)
+- `docs/examples/requests/CreatePeriodRequest.json` (nuevo)
+- `docs/examples/requests/EnvelopeTransferRequest.json` (nuevo)
+- `docs/examples/requests/ExpenseRequest.json` (nuevo)
+- `docs/examples/requests/FundingRequest.json` (nuevo)
+- `docs/examples/requests/IncomeRequest.json` (nuevo)
+- `docs/examples/requests/OpeningBalanceRequest.json` (nuevo)
+- `docs/examples/requests/ReallocationRequest.json` (nuevo)
+- `docs/examples/requests/ReverseRequest.json` (nuevo)
+- `docs/examples/requests/SaveBudgetRequest.json` (nuevo)
+- `docs/examples/requests/TransferRequest.json` (nuevo)
+- `docs/examples/smart-expense-response.json` (nuevo)

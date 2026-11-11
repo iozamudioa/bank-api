@@ -1,0 +1,28 @@
+# Para el servidor 192.168.68.101. Conserva las credenciales actuales.
+# Antes de recrear el contenedor, ejecutar prepare-mongo-replica-key.sh en ese servidor.
+services:
+  mongodb:
+    image: mongo:8
+    container_name: mongodb
+    restart: unless-stopped
+    command:
+      - mongod
+      - --replSet
+      - rs0
+      - --keyFile
+      - /etc/mongo-replica.key
+      - --bind_ip_all
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: REEMPLAZA_CON_EL_USUARIO_ACTUAL
+      MONGO_INITDB_ROOT_PASSWORD: REEMPLAZA_CON_LA_PASSWORD_ACTUAL
+      TZ: America/Mexico_City
+    ports:
+      - "27017:27017"
+    volumes:
+      - /home/iozamudioa/docker/mongo/data:/data/db
+      - /home/iozamudioa/docker/mongo/replica-set.key:/etc/mongo-replica.key:ro
+    networks:
+      - infra-net
+networks:
+  infra-net:
+    external: true

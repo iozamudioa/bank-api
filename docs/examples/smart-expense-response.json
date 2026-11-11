@@ -1,0 +1,46 @@
+{
+  "id": "movement-expense",
+  "householdId": "household-demo",
+  "periodId": "period-q1",
+  "type": "EXPENSE",
+  "status": "POSTED",
+  "amount": 150,
+  "description": "Carne",
+  "targetEnvelopeId": "envelope-central",
+  "incomeSourceId": null,
+  "actor": "olda",
+  "occurredAt": "2026-11-15T18:00:00Z",
+  "reversalOf": null,
+  "funding": [
+    {
+      "envelopeId": "envelope-central",
+      "amount": 80
+    },
+    {
+      "envelopeId": "envelope-sams",
+      "amount": 70
+    }
+  ],
+  "accountEffects": [
+    {
+      "entityId": "account-cash",
+      "before": 1080,
+      "change": -150,
+      "after": 930
+    }
+  ],
+  "envelopeEffects": [
+    {
+      "entityId": "envelope-central",
+      "before": 80,
+      "change": -80,
+      "after": 0
+    },
+    {
+      "entityId": "envelope-sams",
+      "before": 1000,
+      "change": -70,
+      "after": 930
+    }
+  ]
+}

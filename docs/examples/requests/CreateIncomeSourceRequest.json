@@ -1,0 +1,6 @@
+{
+  "name": "Nómina",
+  "type": "PAYROLL",
+  "accountId": "account-digital",
+  "expectedAmount": 21000
+}

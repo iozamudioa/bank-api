@@ -1,0 +1,13 @@
+{
+  "expectedIncome": 21000,
+  "allocations": [
+    {
+      "envelopeId": "envelope-central",
+      "amount": 4500
+    },
+    {
+      "envelopeId": "envelope-sams",
+      "amount": 1000
+    }
+  ]
+}

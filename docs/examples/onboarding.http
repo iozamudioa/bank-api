@@ -1,0 +1,116 @@
+### BANK: ejemplo didáctico en entorno vacío; revisar y copiar IDs reales antes de continuar.
+@base = http://localhost:8080/api/v1
+@household = REEMPLAZA_HOGAR
+@cash = REEMPLAZA_CUENTA_PHYSICAL
+@digital = REEMPLAZA_CUENTA_DIGITAL
+@central = REEMPLAZA_SOBRE_CENTRAL
+@sams = REEMPLAZA_SOBRE_SAMS
+@period = REEMPLAZA_PERIODO
+@source = REEMPLAZA_FUENTE
+
+### 1. Crear hogar; el usuario autenticado queda OWNER
+POST {{base}}/households
+Authorization: Basic olda CAMBIA_ESTA_CLAVE
+Content-Type: application/json
+
+{"name":"Familia","displayName":"Olda"}
+
+### 2. Crear cuenta física; copiar id a cash
+POST {{base}}/households/{{household}}/accounts
+Authorization: Basic olda CAMBIA_ESTA_CLAVE
+Content-Type: application/json
+
+{"name":"Efectivo familiar","type":"PHYSICAL"}
+
+### 3. Crear cuenta digital; copiar id a digital
+POST {{base}}/households/{{household}}/accounts
+Authorization: Basic olda CAMBIA_ESTA_CLAVE
+Content-Type: application/json
+
+{"name":"Banco","type":"DIGITAL"}
+
+### 4. Crear fuente, sin depósito; copiar id a source
+POST {{base}}/households/{{household}}/income-sources
+Authorization: Basic olda CAMBIA_ESTA_CLAVE
+Content-Type: application/json
+
+{"name":"Nómina","type":"PAYROLL","accountId":"{{digital}}","expectedAmount":21000.00}
+
+### 5. Crear Central; copiar id a central
+POST {{base}}/households/{{household}}/envelopes
+Authorization: Basic olda CAMBIA_ESTA_CLAVE
+Content-Type: application/json
+
+{"name":"Central de Abastos","accountId":"{{cash}}","type":"SPENDING","category":"Alimentación"}
+
+### 6. Crear Sam's; copiar id a sams
+POST {{base}}/households/{{household}}/envelopes
+Authorization: Basic olda CAMBIA_ESTA_CLAVE
+Content-Type: application/json
+
+{"name":"Sam's","accountId":"{{cash}}","type":"SAVINGS","category":"Alimentación"}
+
+### 7. Planificar, sin reservas automáticas
+PUT {{base}}/households/{{household}}/budget-template
+Authorization: Basic olda CAMBIA_ESTA_CLAVE
+Content-Type: application/json
+
+{"expectedIncome":21000.00,"allocations":[{"envelopeId":"{{central}}","amount":4500.00},{"envelopeId":"{{sams}}","amount":1000.00}]}
+
+### 8. Crear quincena OPEN; copiar id a period
+POST {{base}}/households/{{household}}/budget-periods
+Authorization: Basic olda CAMBIA_ESTA_CLAVE
+Content-Type: application/json
+
+{"startDate":"2026-11-15","endDate":"2026-11-30","open":true}
+
+### 9. Registrar sólo si ya existen 1080 reales en efectivo y aún no fueron contabilizados
+POST {{base}}/households/{{household}}/movements/opening-balances
+Authorization: Basic olda CAMBIA_ESTA_CLAVE
+Idempotency-Key: demo-opening-cash-001
+Content-Type: application/json
+
+{"accountId":"{{cash}}","amount":1080.00,"description":"Saldo real inicial"}
+
+### 10. Apartar Central; cuenta permanece 1080
+POST {{base}}/households/{{household}}/movements/allocations
+Authorization: Basic olda CAMBIA_ESTA_CLAVE
+Idempotency-Key: demo-allocate-central-001
+Content-Type: application/json
+
+{"periodId":"{{period}}","envelopeId":"{{central}}","amount":80.00,"description":"Apartado Central"}
+
+### 11. Apartar Sam's; cuenta permanece 1080
+POST {{base}}/households/{{household}}/movements/allocations
+Authorization: Basic olda CAMBIA_ESTA_CLAVE
+Idempotency-Key: demo-allocate-sams-001
+Content-Type: application/json
+
+{"periodId":"{{period}}","envelopeId":"{{sams}}","amount":1000.00,"description":"Apartado Sam's"}
+
+### 12. Preview: faltante 70, sin escritura
+POST {{base}}/households/{{household}}/movements/expenses/preview
+Authorization: Basic olda CAMBIA_ESTA_CLAVE
+Content-Type: application/json
+
+{"periodId":"{{period}}","targetEnvelopeId":"{{central}}","amount":150.00,"description":"Carne"}
+
+### 13. Un gasto: cuenta 930, Central 0 y Sam's 930. Repetir conserva respuesta y saldos.
+POST {{base}}/households/{{household}}/movements/expenses
+Authorization: Basic olda CAMBIA_ESTA_CLAVE
+Idempotency-Key: demo-expense-carne-001
+Content-Type: application/json
+
+{"periodId":"{{period}}","targetEnvelopeId":"{{central}}","amount":150.00,"description":"Carne","fundingSources":[{"envelopeId":"{{central}}","amount":80.00},{"envelopeId":"{{sams}}","amount":70.00}]}
+
+### 14. Registrar nómina nueva únicamente si realmente ingresó, sin repetir dinero inicial
+POST {{base}}/households/{{household}}/movements/incomes
+Authorization: Basic olda CAMBIA_ESTA_CLAVE
+Idempotency-Key: demo-income-payroll-001
+Content-Type: application/json
+
+{"periodId":"{{period}}","accountId":"{{digital}}","incomeSourceId":"{{source}}","amount":21000.00,"description":"Nómina real"}
+
+### 15. Consultar saldos oficiales
+GET {{base}}/households/{{household}}/dashboard
+Authorization: Basic olda CAMBIA_ESTA_CLAVE
