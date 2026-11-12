@@ -19,6 +19,10 @@
                 "BANK_OWNER_PASSWORD": "!qaz2wsX",
                 "BANK_CECY_USERNAME": "cecy",
                 "BANK_CECY_PASSWORD": "cecy",
+                "BANK_RAVEN_BASE_URL": "https://cctv-api.ioza.dev",
+                "BANK_RAVEN_API_KEY": "clave-larga-olda",
+                "BANK_RAVEN_APP_ID": "bank",
+                "BANK_RAVEN_INTEGRATION_ID": "bank-webpush",
                 "PORT": "8080"
             },
             "cwd": "${workspaceFolder}",

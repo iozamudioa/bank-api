@@ -1,18 +1,21 @@
 package dev.ioza.bank.infrastructure.config;
 
-import com.mongodb.ReadConcern;
-import com.mongodb.TransactionOptions;
-import com.mongodb.WriteConcern;
 import org.bson.Document;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.MongoDatabaseFactory;
 import org.springframework.data.mongodb.MongoTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import com.mongodb.ReadConcern;
+import com.mongodb.TransactionOptions;
+import com.mongodb.WriteConcern;
+
 @Configuration
 @EnableTransactionManagement
+@EnableConfigurationProperties(RavenProperties.class)
 public class InfrastructureConfig {
   @Bean
   MongoTransactionManager mongoTransactionManager(MongoDatabaseFactory factory) {
