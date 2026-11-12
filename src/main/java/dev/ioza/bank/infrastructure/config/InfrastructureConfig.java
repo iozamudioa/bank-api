@@ -2,7 +2,6 @@ package dev.ioza.bank.infrastructure.config;
 
 import org.bson.Document;
 import org.springframework.boot.ApplicationRunner;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.MongoDatabaseFactory;
@@ -15,7 +14,6 @@ import com.mongodb.WriteConcern;
 
 @Configuration
 @EnableTransactionManagement
-@EnableConfigurationProperties(RavenProperties.class)
 public class InfrastructureConfig {
   @Bean
   MongoTransactionManager mongoTransactionManager(MongoDatabaseFactory factory) {
