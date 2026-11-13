@@ -10,12 +10,8 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.transaction.support.TransactionSynchronization;
-import org.springframework.transaction.support.TransactionSynchronizationManager;
 
 import dev.ioza.bank.application.commands.AccountExpense;
 import dev.ioza.bank.application.commands.Allocation;
@@ -27,7 +23,6 @@ import dev.ioza.bank.application.commands.MovementReplacement;
 import dev.ioza.bank.application.commands.OpeningBalance;
 import dev.ioza.bank.application.commands.Reallocation;
 import dev.ioza.bank.application.commands.Reverse;
-import dev.ioza.bank.application.commands.SendHouseholdNotificationCommand;
 import dev.ioza.bank.application.commands.Transfer;
 import dev.ioza.bank.application.ports.in.AccountExpensePreview;
 import dev.ioza.bank.application.ports.in.CorrectionPreview;
@@ -77,9 +72,7 @@ public class MovementService implements Finance {
 
   private final AccessService access;
 
-  private static final Logger log = LoggerFactory.getLogger(MovementService.class);
-
-  private final SendHouseholdNotificationUseCase notifications;
+  private final FinancialNotificationPublisher notificationPublisher;
   public MovementService(
       Accounts accounts,
       Envelopes envelopes,
@@ -94,7 +87,7 @@ public class MovementService implements Finance {
     this.budgets = budgets;
     this.movements = movements;
     this.access = access;
-    this.notifications = notifications;
+    this.notificationPublisher = new FinancialNotificationPublisher(notifications);
   }
 
   private static String id() {
@@ -219,7 +212,7 @@ public class MovementService implements Finance {
       // concurrent
       // updates.
       persistBalances();
-      return movements.save(
+      Movement movement = movements.save(
           new Movement(
               id(),
               household,
@@ -236,6 +229,8 @@ public class MovementService implements Finance {
               funding == null ? List.of() : List.copyOf(funding),
               ae,
               ee));
+      notificationPublisher.movement(movement);
+      return movement;
     }
   }
 
@@ -281,37 +276,6 @@ public class MovementService implements Finance {
         c.incomeSourceId(),
         null,
         null);
-
-    // Se prepara el mensaje, pero Raven solo se invoca después del commit de MongoDB.
-    // Si algo falla preparando la notificación, no debe afectar al ingreso.
-    try {
-      SendHouseholdNotificationCommand notification = new SendHouseholdNotificationCommand(
-          household,
-          "bank-income-" + movement.id(),
-          "BANK · Nuevo ingreso",
-          "%s registró un ingreso de $%,.2f MXN".formatted(
-              movement.actor(), movement.amount()),
-          Map.of(
-              "eventType", "bank.income.created",
-              "movementId", movement.id(),
-              "householdId", household));
-
-      TransactionSynchronizationManager.registerSynchronization(new TransactionSynchronization() {
-        @Override
-        public void afterCommit() {
-          try {
-            notifications.send(notification).subscribe(
-                ignored -> {},
-                error -> log.warn("Error notificando ingreso {}", movement.id(), error),
-                () -> log.info("Raven aceptó la notificación del ingreso {}", movement.id()));
-          } catch (Exception e) {
-            log.warn("No se pudo iniciar la notificación del ingreso {}", movement.id(), e);
-          }
-        }
-      });
-    } catch (Exception e) {
-      log.warn("No se pudo preparar la notificación del ingreso {}", movement.id(), e);
-    }
 
     return movement;
   }
@@ -767,7 +731,7 @@ public class MovementService implements Finance {
             original.accountEffects(),
             original.envelopeEffects(),
             original.correction()));
-    return movements.save(
+    Movement corrected = movements.save(
         new Movement(
             id(),
             household,
@@ -798,6 +762,8 @@ public class MovementService implements Finance {
                     c.replacement().fromEnvelopeId(),
                     c.replacement().toEnvelopeId(),
                     c.replacement().incomeSourceId()))));
+    notificationPublisher.corrected(corrected);
+    return corrected;
   }
 
   @Override
