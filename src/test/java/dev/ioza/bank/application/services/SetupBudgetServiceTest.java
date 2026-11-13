@@ -201,7 +201,8 @@ class SetupBudgetServiceTest {
           access,
           budgets,
           creations,
-          new JsonCommandFingerprint(JsonMapper.builder().build()));
+          new JsonCommandFingerprint(JsonMapper.builder().build()),
+          new FinancialNotificationPublisher(command -> reactor.core.publisher.Mono.empty()));
   final BudgetService budget = new BudgetService(budgets, envelopes, access, accounts);
 
   String household() {
