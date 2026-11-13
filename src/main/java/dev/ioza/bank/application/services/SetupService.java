@@ -46,6 +46,7 @@ public class SetupService implements Setup {
   private final Budgets budgets;
   private final EnvelopeCreations creations;
   private final CommandFingerprint fingerprints;
+  private final FinancialNotificationPublisher notificationPublisher;
 
   public SetupService(
       Households households,
@@ -56,7 +57,8 @@ public class SetupService implements Setup {
       AccessService access,
       Budgets budgets,
       EnvelopeCreations creations,
-      CommandFingerprint fingerprints) {
+      CommandFingerprint fingerprints,
+      FinancialNotificationPublisher notificationPublisher) {
     this.households = households;
     this.members = members;
     this.accounts = accounts;
@@ -66,6 +68,7 @@ public class SetupService implements Setup {
     this.budgets = budgets;
     this.creations = creations;
     this.fingerprints = fingerprints;
+    this.notificationPublisher = notificationPublisher;
   }
 
   private static String id() {
@@ -186,6 +189,7 @@ public class SetupService implements Setup {
               .orElseGet(() -> new BudgetTemplate(id(), householdId, Money.ZERO, List.of()));
       budgets.saveTemplate(template.withLine(envelope.id(), habitual));
     }
+    notificationPublisher.envelopeCreated(envelope, access.username());
     return envelope;
   }
 
