@@ -2,10 +2,8 @@ package dev.ioza.bank.application.services;
 
 import dev.ioza.bank.application.commands.SendHouseholdNotificationCommand;
 import dev.ioza.bank.application.ports.in.SendHouseholdNotificationUseCase;
-import dev.ioza.bank.domain.enums.MovementType;
 import dev.ioza.bank.domain.model.Envelope;
 import dev.ioza.bank.domain.model.Movement;
-import java.math.BigDecimal;
 import java.util.LinkedHashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -95,6 +93,10 @@ public class FinancialNotificationPublisher {
       String message = correction
           ? movement.actor() + " corrigió un movimiento por " + money
           : movement.actor() + " " + action + " " + money;
+      if (movement.description() != null && !movement.description().isBlank()) {
+        String detail = movement.description().strip();
+        message += " · " + detail.substring(0, Math.min(detail.length(), 120));
+      }
       Map<String, Object> metadata = new LinkedHashMap<>();
       metadata.put("eventType", event);
       metadata.put("movementId", movement.id());
