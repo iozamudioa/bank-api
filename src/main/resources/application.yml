@@ -9,16 +9,17 @@ spring:
       representation:
         big-decimal: DECIMAL128
 bank:
-  auth:
-    owner-user: ${BANK_OWNER_USERNAME:olda}
-    owner-password: ${BANK_OWNER_PASSWORD:}
-    cecy-user: ${BANK_CECY_USERNAME:cecy}
-    cecy-password: ${BANK_CECY_PASSWORD:}
   raven:
     base-url: ${BANK_RAVEN_BASE_URL:https://cctv-api.ioza.dev}
     api-key: ${BANK_RAVEN_API_KEY:}
     app-id: ${BANK_RAVEN_APP_ID:bank}
     integration-id: ${BANK_RAVEN_INTEGRATION_ID:bank-webpush}
+kingdom:
+  tavern:
+    lock:
+      enabled: true
+      issuer: ${KINGDOM_ISSUER}
+      royal-archives-uri: ${KINGDOM_ROYAL_ARCHIVES_URI}
 server:
   port: ${PORT:8080}
 management:
