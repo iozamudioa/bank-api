@@ -1,12 +1,9 @@
-FROM maven:3.9.9-eclipse-temurin-17 AS build
-WORKDIR /workspace
-COPY pom.xml .
-COPY src ./src
-RUN mvn -B -DskipTests clean package
-
 FROM eclipse-temurin:17-jre
+
+LABEL org.opencontainers.image.vendor="Ioza"
+ENV TZ=America/Mexico_City
 WORKDIR /app
-COPY --from=build /workspace/target/bank-api-0.1.0-SNAPSHOT.jar /app/bank-api.jar
+COPY --chown=10001:10001 app.jar app.jar
 USER 10001:10001
 EXPOSE 8080
-ENTRYPOINT ["java", "-jar", "/app/bank-api.jar"]
+ENTRYPOINT ["java", "-jar", "app.jar"]
