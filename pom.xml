@@ -21,6 +21,11 @@
   </properties>
   <dependencies>
     <dependency>
+      <groupId>dev.ioza.kingdom</groupId>
+      <artifactId>kingdom-tavern-lock</artifactId>
+      <version>0.0.1-SNAPSHOT</version>
+    </dependency>
+    <dependency>
       <groupId>org.springdoc</groupId>
       <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
       <version>${springdoc.version}</version>
