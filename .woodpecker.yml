@@ -1,0 +1,48 @@
+steps:
+  - name: build-bank-api
+    image: registry.ioza.dev/ci/maven:21
+    environment:
+      NEXUS_USERNAME:
+        from_secret: nexus_username
+      NEXUS_PASSWORD:
+        from_secret: nexus_password
+    commands:
+      - java -version
+      - mvn -version
+      - mvn -B -U clean package -DskipTests
+
+  - name: publish-bank-api
+    image: docker:cli
+    environment:
+      NEXUS_USERNAME:
+        from_secret: nexus_username
+      NEXUS_PASSWORD:
+        from_secret: nexus_password
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    commands:
+      - cp target/bank-api-0.1.0-SNAPSHOT.jar app.jar
+      - echo "$NEXUS_PASSWORD" | docker login registry.ioza.dev -u "$NEXUS_USERNAME" --password-stdin
+      - docker build -t registry.ioza.dev/bank/bank-api:0.1.0-SNAPSHOT .
+      - docker push registry.ioza.dev/bank/bank-api:0.1.0-SNAPSHOT
+
+  - name: deploy-bank-api
+    image: docker:cli
+    environment:
+      NEXUS_USERNAME:
+        from_secret: nexus_username
+      NEXUS_PASSWORD:
+        from_secret: nexus_password
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /home/iozamudioa/docker/bank-api:/home/iozamudioa/docker/bank-api
+    commands:
+      - echo "$NEXUS_PASSWORD" | docker login registry.ioza.dev -u "$NEXUS_USERNAME" --password-stdin
+      - cd /home/iozamudioa/docker/bank-api
+      - docker compose -p bank-api pull bank-api
+      - docker compose -p bank-api up -d --force-recreate --no-deps bank-api
+      - docker compose -p bank-api logs --tail=30 bank-api
+
+when:
+  - event: push
+    branch: main
