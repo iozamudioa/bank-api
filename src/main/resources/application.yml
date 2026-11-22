@@ -20,6 +20,18 @@ kingdom:
       enabled: true
       issuer: ${KINGDOM_ISSUER}
       royal-archives-uri: ${KINGDOM_ROYAL_ARCHIVES_URI}
+    emissary:
+      enabled: ${KINGDOM_EMISSARY_ENABLED:true}
+      bastion-url: ${KINGDOM_EMISSARY_BASTION_URL:http://bastion:8080}
+      username: ${KINGDOM_EMISSARY_USERNAME}
+      password: ${KINGDOM_EMISSARY_PASSWORD}
+      tavern-name: bank-api
+      target: http://bank-api:8080
+      domain: bank-api.ioza.dev
+      path: /api/v1/**
+      health-path: /actuator/health
+      capabilities: []
+      public-paths: []
 server:
   port: ${PORT:8080}
 management:
