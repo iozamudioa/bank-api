@@ -44,5 +44,5 @@ steps:
       - docker compose -p bank-api logs --tail=30 bank-api
 
 when:
-  - event: push
+  - event: [push, manual]
     branch: main
