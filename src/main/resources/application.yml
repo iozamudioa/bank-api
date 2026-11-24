@@ -26,9 +26,11 @@ kingdom:
       username: ${KINGDOM_EMISSARY_USERNAME:}
       password: ${KINGDOM_EMISSARY_PASSWORD:}
       tavern-name: bank-api
-      target: http://bank-api:8080
+      tavern-id: bank-api
+      target: ${KINGDOM_EMISSARY_TARGET:http://bank-api:8080}
       domain: bank-api.ioza.dev
       path: /api/v1/**
+      context: /bank-api
       health-path: /actuator/health
       capabilities: []
       public-paths: []
